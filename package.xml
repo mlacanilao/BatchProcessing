@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Meta>
+    <title>Batch Processing</title>
+    <id>omegaplatinum.elin.batchprocessing</id>
+    <author>OmegaPlatinum</author>
+    <loadPriority>100</loadPriority>
+    <description>
+        Allows crafting stations such as the sawmill and kiln to process multiple ingredients per operation.
+        製材所や窯などのクラフト設備で、1回の作業で複数の材料を処理できるようにします。
+
+        [h1] Features [/h1]
+        [list]
+        [*]
+        [*]
+        [*]
+        [/list]
+
+        [h1] Compatibility [/h1]
+        Works with existing save files.
+
+        Supports Game Version:
+
+        [h1] 特徴 [/h1]
+        [list]
+        [*]
+        [*]
+        [*]
+        [/list]
+
+        [h1] 互換性 [/h1]
+        既存のセーブデータと互換性があります。
+
+        対応ゲームバージョン:
+    </description>
+    <tags>General,Balance</tags>
+    <visibility>Public</visibility>
+    <version>0.23.222</version>
+</Meta>
