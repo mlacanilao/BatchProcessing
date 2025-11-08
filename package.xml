@@ -5,34 +5,66 @@
     <author>OmegaPlatinum</author>
     <loadPriority>100</loadPriority>
     <description>
-        Allows crafting stations such as the sawmill and kiln to process multiple ingredients per operation.
-        製材所や窯などのクラフト設備で、1回の作業で複数の材料を処理できるようにします。
+        Allows processing stations such as the Sawmill, Kiln, Smelter, and more to process multiple ingredients per operation.
+        製材機や窯、溶鉱炉などの加工設備で、1回の作業で複数の材料を処理できるようにします。
 
         [h1] Features [/h1]
         [list]
-        [*]
-        [*]
-        [*]
+        [*] Enables batch processing for the following processing stations: Sawmill, Kiln, Smelter, Spinner, Stonecutter, Gem Cutter, Sculpting Table, Dye Maker, Millstone, Wooden Mortar, Ration Maker
+        [*] Process multiple items per craft instead of one at a time.
+        [*] Multiplies input ingredients, SP cost, fuel consumption, and output quantity based on the configured multiplier.
+        [*] Includes a configurable Ingredient Multiplier (default: 2).
+        [*] Optional Auto Max Batch feature that automatically sets the batch size based on current stamina and available ingredients.
+        [*] Provides an in-game configuration menu accessible via middle-mouse click (MMB) on processing stations.
+        [/list]
+
+        [h1] Configuration Options [/h1]
+        [list]
+        [*] Ingredient Multiplier
+        Multiplies required ingredients and output per craft.
+        Example: 2 = consumes 2× materials, produces 2× results.
+        [*] Enable Auto Max Batch Multiplier
+        Automatically calculates the maximum safe batch so one craft uses up to current stamina and available ingredients.
         [/list]
 
         [h1] Compatibility [/h1]
         Works with existing save files.
 
-        Supports Game Version:
+        [h1] Configuration File Location [/h1]
+        If needed, users can also edit the configuration file directly:
+        [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.batchprocessing.cfg [/code]
+
+        [img] https://img.shields.io/badge/Supports%20Game%20Version-EA%2023.229%20Stable-green [/img]
 
         [h1] 特徴 [/h1]
         [list]
-        [*]
-        [*]
-        [*]
+        [*] 以下の加工設備で一括処理が可能になります： 製材機、かまど、溶鉱炉、紡績機、石切機、宝石研磨台、彫刻台、染料釜、石うす、木うす、旅糧製造機
+        [*] 1回の作業で複数のアイテムをまとめて加工できます。
+        [*] 設定した倍率に応じて、材料の消費量、SP消費量、燃料消費量、生成物の数を同時に増加させます。
+        [*] 材料倍率を設定できるコンフィグを追加（デフォルト：2）。
+        [*] 現在のスタミナと素材所持数に基づいて最大処理数を自動計算するオート機能を追加（任意）。
+        [*] 加工設備を中クリック（MMB）すると、ゲーム内で設定メニューを開くことができます。
+        [/list]
+
+        [h1] 設定項目 [/h1]
+        [list]
+        [*] 材料倍率（Ingredient Multiplier）
+        必要素材と成果物を指定倍率で増加させます。
+        例：2 = 消費2倍、成果物2倍。
+        [*] オート最大処理（Enable Auto Max Batch Multiplier）
+        現在のスタミナと素材所持数に合わせて、1回分の最大処理数を自動計算します。
         [/list]
 
         [h1] 互換性 [/h1]
         既存のセーブデータと互換性があります。
 
-        対応ゲームバージョン:
+        [h1] 設定ファイルの場所 [/h1]
+        必要に応じて、設定ファイルを直接編集することもできます：
+        [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.batchprocessing.cfg [/code]
+
+        [img] https://img.shields.io/badge/対応ゲームバージョン対応ゲームバージョン-EA%2023.229%20Stable-green [/img]
     </description>
-    <tags>General,Balance</tags>
+    <tags>General,Balance,QoL</tags>
     <visibility>Public</visibility>
-    <version>0.23.222</version>
+    <version>0.23.229</version>
 </Meta>

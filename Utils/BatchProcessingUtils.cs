@@ -1,0 +1,109 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace BatchProcessing
+{
+    internal static class BatchProcessingUtils
+    {
+        internal static int MaxBatchMultiplier = 1;
+
+        internal static void CalculateAutoMaxBatchMultiplier(AI_UseCrafter ai)
+        {
+            BatchProcessing.Log(payload: $"CalculateAutoMaxBatchMultiplier");
+            
+            MaxBatchMultiplier = 1;
+            
+            int stamina = EClass.pc?.stamina?.value ?? 0;
+            BatchProcessing.Log(payload: $"stamina: {stamina}");
+            
+            if (stamina <= 0)
+            {
+                return;
+            }
+
+            if (ai is null ||
+                ai.layer is null ||
+                ai.crafter is null)
+            {
+                return;
+            }
+            
+            List<Thing> targets = ai.layer.GetTargets();
+            BatchProcessing.Log(payload: $"targets: {targets}");
+            BatchProcessing.Log(payload: $"targets.Count: {targets.Count}");
+            foreach (Thing thing in targets)
+            {
+                BatchProcessing.Log(payload: $"targets.thing: {thing}");
+            }
+            
+            int available = int.MaxValue;
+            for (int i = 0; i < targets.Count; i++)
+            {
+                int num = targets[index: i]?.Num ?? 0;
+                available = Mathf.Min(a: available, b: num);
+            }
+            BatchProcessing.Log(payload: $"available: {available}");
+            
+            SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
+            BatchProcessing.Log(payload: $"row: {row}");
+
+            if (row is null)
+            {
+                return;
+            }
+            
+            int costSp = Mathf.Max(a: 1, b: row.sp);
+            BatchProcessing.Log(payload: $"costSp: {costSp}");
+            
+            int maxByStamina = Mathf.Max(a: 1, b: stamina / costSp);
+            BatchProcessing.Log(payload: $"maxByStamina: {maxByStamina}");
+            
+            int maxByInventory = Mathf.Max(a: 1, b: available);
+            BatchProcessing.Log(payload: $"maxByInventory: {maxByInventory}");
+            
+            MaxBatchMultiplier = Mathf.Clamp(
+                value: maxByStamina,
+                min: 1,
+                max: maxByInventory
+            );
+                
+            BatchProcessing.Log(payload: $"MaxBatchMultiplier: {MaxBatchMultiplier}");
+        }
+        
+        internal static SourceRecipe.Row GetSourceRow(AI_UseCrafter ai)
+        {
+            if (ai == null || 
+                ai.crafter == null || 
+                ai.layer == null)
+            {
+                return null;
+            }
+
+            var targets = ai.layer.GetTargets();
+            if (targets == null || 
+                targets.Count == 0)
+            {
+                return null;
+            }
+
+            var tempAi = new AI_UseCrafter
+            {
+                crafter = ai.crafter,
+                layer   = ai.layer,
+                recipe  = ai.recipe,
+                num     = ai.num,
+                ings    = targets
+            };
+
+            SourceRecipe.Row row = ai.crafter.GetSource(ai: tempAi);
+            
+            if (row?.type == "Grind" ||
+                row?.type == "Incubator")
+            {
+                return null;
+            }
+            
+            return row;
+        }
+    }
+}

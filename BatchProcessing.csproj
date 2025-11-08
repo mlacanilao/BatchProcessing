@@ -45,6 +45,10 @@
           <HintPath>..\..\BepInEx\BepInEx.Unity.dll</HintPath>
           <Private>False</Private>
         </Reference>
+        <Reference Include="CustomWhateverLoader">
+          <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\2135150\3544010094\CustomWhateverLoader.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
         <Reference Include="Elin">
           <HintPath>..\..\Elin\Elin.dll</HintPath>
           <Private>False</Private>
@@ -110,15 +114,22 @@
         <Compile Include="BatchProcessing\BatchProcessing.cs" />
         <Compile Include="BatchProcessing\Patcher.cs" />
         <Compile Include="Config\BatchProcessingConfig.cs" />
-        <Compile Include="Patches\AI_UseCrafterPatch.cs" />
+        <Compile Include="Patches\ActPlanPatch.cs" />
         <Compile Include="Patches\LayerBaseCraftPatch.cs" />
         <Compile Include="Patches\TraitCrafterPatch.cs" />
+        <Compile Include="Patches\CardPatch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Utils\BatchProcessingLang.cs" />
+        <Compile Include="Utils\BatchProcessingUtils.cs" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="package.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <Content Include="preview.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="preview.pdn" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

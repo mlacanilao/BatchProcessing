@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 
 namespace BatchProcessing
@@ -25,11 +26,36 @@ namespace BatchProcessing
             TraitCrafterPatch.GetCostSpPostfix(__instance: __instance, ai: ai, __result: ref __result);
         }
         
-        [HarmonyPostfix]
-        [HarmonyPatch(declaringType: typeof(AI_UseCrafter), methodName: nameof(AI_UseCrafter.OnSuccess))]
-        public static void AI_UseCrafterOnSuccess(AI_UseCrafter __instance)
+        [HarmonyPrefix]
+        [HarmonyPatch(declaringType: typeof(Card), methodName: nameof(Card.ModCharge))]
+        public static void CardModCharge(Card __instance, ref int a)
         {
-            AI_UseCrafterPatch.OnSuccessPostfix(__instance: __instance);
+            CardPatch.ModChargePrefix(__instance: __instance, a: ref a);
+        }
+        
+        [HarmonyPrefix]
+        [HarmonyPatch(declaringType: typeof(ActPlan), methodName: nameof(ActPlan.ShowContextMenu))]
+        public static void ActPlanShowContextMenu(ActPlan __instance)
+        {
+            ActPlanPatch.ShowContextMenuPrefix(__instance: __instance);
+        }
+        
+        [HarmonyPrefix]
+        [HarmonyPatch(declaringType: typeof(ActPlan.Item), methodName: nameof(ActPlan.Item.Perform))]
+        public static bool ActPlanItemPerform(ActPlan.Item __instance)
+        {
+            if (__instance?.act is DynamicAct dynamicAct == false)
+            {
+                return true;
+            }
+            
+            if (dynamicAct?.id != BatchProcessingLang.T(key: "bp_menu_title"))
+            {
+                return true;
+            }
+            
+            dynamicAct.Perform();
+            return false;
         }
     }
 }

@@ -1,26 +1,41 @@
+using System.Collections;
+using Cwl.Helper.Unity;
 using UnityEngine;
 
 namespace BatchProcessing
 {
-    public class TraitCrafterPatch
+    internal static class TraitCrafterPatch
     {
         internal static void CraftPostfix(TraitCrafter __instance, AI_UseCrafter ai, ref Thing __result)
         {
-            int ingredientMultiplier = Mathf.Max(a: 1, b: BatchProcessingConfig.IngredientMultiplier?.Value ?? 1);
-            
-            SourceRecipe.Row source = __instance.GetSource(ai: ai);
-            TraitCrafter.MixType mixType = source.type.ToEnum<TraitCrafter.MixType>(ignoreCase: true);
-            string text = source.thing;
+            if (EClass.pc?.ai is AI_UseCrafter == false)
+            {
+                return;
+            }
             
             BatchProcessing.Log(payload: $"CraftPostfix");
-            BatchProcessing.Log(payload: $"ai.ings[0]: {ai.ings[index: 0]}");
-            BatchProcessing.Log(payload: $"__instance.numIng: {__instance.numIng}");
-            BatchProcessing.Log(payload: $"source.id: {source.id}");
-            BatchProcessing.Log(payload: $"mixType: {mixType}");
-            BatchProcessing.Log(payload: $"text: {text}");
-            BatchProcessing.Log(payload: $"__result: {__result}");
-            BatchProcessing.Log(payload: $"__result.Num: {__result.Num}");
-
+            
+            SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
+            BatchProcessing.Log(payload: $"row: {row}");
+            
+            if (row is null)
+            {
+                return;
+            }
+            
+            int ingredientMultiplier = Mathf.Max(a: 1, b: BatchProcessingConfig.IngredientMultiplier?.Value ?? 1);
+            bool enableAutoMaxBatchMultiplier = BatchProcessingConfig.EnableAutoMaxBatchMultiplier?.Value ?? false;
+            
+            if (enableAutoMaxBatchMultiplier == true)
+            {
+                ingredientMultiplier = BatchProcessingUtils.MaxBatchMultiplier;
+            }
+            
+            if (ingredientMultiplier == 1)
+            {
+                return;
+            }
+            
             __result?.SetNum(a: __result.Num * ingredientMultiplier);
             
             BatchProcessing.Log(payload: $"__result: {__result}");
@@ -28,16 +43,37 @@ namespace BatchProcessing
 
         internal static void GetCostSpPostfix(TraitCrafter __instance, AI_UseCrafter ai, ref int __result)
         {
-            int ingredientMultiplier = Mathf.Max(a: 1, b: BatchProcessingConfig.IngredientMultiplier?.Value ?? 1);
+            if (EClass.pc?.ai is AI_UseCrafter == false)
+            {
+                return;
+            }
             
             BatchProcessing.Log(payload: $"GetCostSpPostfix");
-            BatchProcessing.Log(payload: $"ai: {ai}");
-            BatchProcessing.Log(payload: $"__result: {__result}");
+            
+            SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
+            BatchProcessing.Log(payload: $"row: {row}");
+            
+            if (row is null)
+            {
+                return;
+            }
+            
+            int ingredientMultiplier = Mathf.Max(a: 1, b: BatchProcessingConfig.IngredientMultiplier?.Value ?? 1);
+            bool enableAutoMaxBatchMultiplier = BatchProcessingConfig.EnableAutoMaxBatchMultiplier?.Value ?? false;
+            
+            if (enableAutoMaxBatchMultiplier == true)
+            {
+                ingredientMultiplier = BatchProcessingUtils.MaxBatchMultiplier;
+            }
+            
+            if (ingredientMultiplier == 1)
+            {
+                return;
+            }
             
             __result *= ingredientMultiplier;
-                
-            BatchProcessing.Log(payload: $"__result: {__result}");
             
+            BatchProcessing.Log(payload: $"__result: {__result}");
         }
     }
 }
