@@ -13,10 +13,7 @@ namespace BatchProcessing
                 return;
             }
             
-            BatchProcessing.Log(payload: $"CraftPostfix");
-            
             SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
-            BatchProcessing.Log(payload: $"row: {row}");
             
             if (row is null)
             {
@@ -37,8 +34,6 @@ namespace BatchProcessing
             }
             
             __result?.SetNum(a: __result.Num * ingredientMultiplier);
-            
-            BatchProcessing.Log(payload: $"__result: {__result}");
         }
 
         internal static void GetCostSpPostfix(TraitCrafter __instance, AI_UseCrafter ai, ref int __result)
@@ -48,10 +43,7 @@ namespace BatchProcessing
                 return;
             }
             
-            BatchProcessing.Log(payload: $"GetCostSpPostfix");
-            
             SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
-            BatchProcessing.Log(payload: $"row: {row}");
             
             if (row is null)
             {
@@ -72,8 +64,6 @@ namespace BatchProcessing
             }
             
             __result *= ingredientMultiplier;
-            
-            BatchProcessing.Log(payload: $"__result: {__result}");
         }
     }
 }

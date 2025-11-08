@@ -15,18 +15,7 @@ namespace BatchProcessing
                 return;
             }
             
-            BatchProcessing.Log(payload: $"ModChargePrefix");
-            BatchProcessing.Log(payload: $"__instance: {__instance}");
-            BatchProcessing.Log(payload: $"__instance.trait: {__instance.trait}");
-            BatchProcessing.Log(payload: $"a: {a}");
-            BatchProcessing.Log(payload: $"EClass.pc?.ai: {EClass.pc?.ai}");
-            BatchProcessing.Log(payload: $"(EClass.pc?.ai as AI_UseCrafter).crafter: {(EClass.pc?.ai as AI_UseCrafter).crafter}");
-            BatchProcessing.Log(payload: $"ReferenceEquals(__instance.trait, (EClass.pc?.ai as AI_UseCrafter).crafter: {ReferenceEquals(objA: __instance.trait, objB: (EClass.pc?.ai as AI_UseCrafter).crafter)}");
-            
-            
-            
             SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
-            BatchProcessing.Log(payload: $"row: {row}");
             
             if (row is null)
             {
@@ -47,7 +36,6 @@ namespace BatchProcessing
             }
             
             a *= ingredientMultiplier;
-            BatchProcessing.Log(payload: $"a: {a}");
         }
     }
 }
