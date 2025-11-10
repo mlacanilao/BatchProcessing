@@ -82,7 +82,8 @@ namespace BatchProcessing
             SourceRecipe.Row row = ai.crafter.GetSource(ai: tempAi);
             
             if (row?.type == "Grind" ||
-                row?.type == "Incubator")
+                row?.type == "Incubator" ||
+                row?.type == "RuneMold")
             {
                 return null;
             }
