@@ -20,14 +20,8 @@ namespace BatchProcessing
                 return;
             }
             
-            int ingredientMultiplier = Mathf.Max(a: 1, b: BatchProcessingConfig.IngredientMultiplier?.Value ?? 1);
-            bool enableAutoMaxBatchMultiplier = BatchProcessingConfig.EnableAutoMaxBatchMultiplier?.Value ?? false;
-            
-            if (enableAutoMaxBatchMultiplier == true)
-            {
-                ingredientMultiplier = BatchProcessingUtils.MaxBatchMultiplier;
-            }
-            
+            int ingredientMultiplier = BatchProcessingUtils.GetSafeIngredientMultiplier(ai: ai);
+
             if (ingredientMultiplier == 1)
             {
                 return;
@@ -50,14 +44,8 @@ namespace BatchProcessing
                 return;
             }
             
-            int ingredientMultiplier = Mathf.Max(a: 1, b: BatchProcessingConfig.IngredientMultiplier?.Value ?? 1);
-            bool enableAutoMaxBatchMultiplier = BatchProcessingConfig.EnableAutoMaxBatchMultiplier?.Value ?? false;
-            
-            if (enableAutoMaxBatchMultiplier == true)
-            {
-                ingredientMultiplier = BatchProcessingUtils.MaxBatchMultiplier;
-            }
-            
+            int ingredientMultiplier = BatchProcessingUtils.GetSafeIngredientMultiplier(ai: ai);
+
             if (ingredientMultiplier == 1)
             {
                 return;

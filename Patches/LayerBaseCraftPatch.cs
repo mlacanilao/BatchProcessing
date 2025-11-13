@@ -13,6 +13,12 @@ namespace BatchProcessing
             }
 
             AI_UseCrafter ai = (AI_UseCrafter)EClass.pc?.ai;
+
+            if (ai == null)
+            {
+                return;
+            }
+            
             SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
 
             if (row is null)
@@ -20,14 +26,7 @@ namespace BatchProcessing
                 return;
             }
             
-            int ingredientMultiplier = Mathf.Max(a: 1, b: BatchProcessingConfig.IngredientMultiplier?.Value ?? 1);
-            bool enableAutoMaxBatchMultiplier = BatchProcessingConfig.EnableAutoMaxBatchMultiplier?.Value ?? false;
-
-            if (enableAutoMaxBatchMultiplier == true)
-            {
-                BatchProcessingUtils.CalculateAutoMaxBatchMultiplier(ai: ai);
-                ingredientMultiplier = BatchProcessingUtils.MaxBatchMultiplier;
-            }
+            int ingredientMultiplier = BatchProcessingUtils.GetSafeIngredientMultiplier(ai: ai);
 
             if (ingredientMultiplier == 1)
             {
