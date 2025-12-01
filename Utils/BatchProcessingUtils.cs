@@ -82,7 +82,8 @@ namespace BatchProcessing
             
             if (row?.type == "Grind" ||
                 row?.type == "Incubator" ||
-                row?.type == "RuneMold")
+                row?.type == "RuneMold" ||
+                row?.type == "Fortune")
             {
                 return null;
             }

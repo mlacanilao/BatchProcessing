@@ -34,7 +34,7 @@
         If needed, users can also edit the configuration file directly:
         [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.batchprocessing.cfg [/code]
 
-        [img] https://img.shields.io/badge/Supports%20Game%20Version-EA%2023.229%20Stable-green [/img]
+        [img] https://img.shields.io/badge/Supports%20Game%20Version-EA%2023.237%20Stable-green [/img]
 
         [h1] 特徴 [/h1]
         [list]
@@ -62,9 +62,9 @@
         必要に応じて、設定ファイルを直接編集することもできます：
         [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.batchprocessing.cfg [/code]
 
-        [img] https://img.shields.io/badge/対応ゲームバージョン対応ゲームバージョン-EA%2023.229%20Stable-green [/img]
+        [img] https://img.shields.io/badge/対応ゲームバージョン対応ゲームバージョン-EA%2023.237%20Stable-green [/img]
     </description>
     <tags>General,Balance,QoL</tags>
     <visibility>Public</visibility>
-    <version>0.23.229</version>
+    <version>0.23.237</version>
 </Meta>
