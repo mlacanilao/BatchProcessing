@@ -12,27 +12,38 @@ namespace BatchProcessing
                 return;
             }
 
-            AI_UseCrafter ai = (AI_UseCrafter)EClass.pc?.ai;
+            AI_UseCrafter ai = (AI_UseCrafter)EClass.pc.ai;
 
             if (ai == null)
             {
                 return;
             }
-            
-            SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
 
+            SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
             if (row is null)
             {
                 return;
             }
-            
-            int ingredientMultiplier = BatchProcessingUtils.GetSafeIngredientMultiplier(ai: ai);
+
+            if (index == 0)
+            {
+                int computedMultiplier = BatchProcessingUtils.GetSafeIngredientMultiplier(ai: ai);
+                BatchProcessingUtils.CachedIngredientMultiplier = Mathf.Max(
+                    a: 1,
+                    b: computedMultiplier
+                );
+            }
+
+            int ingredientMultiplier = Mathf.Max(
+                a: 1,
+                b: BatchProcessingUtils.CachedIngredientMultiplier
+            );
 
             if (ingredientMultiplier == 1)
             {
                 return;
             }
-            
+
             __result *= ingredientMultiplier;
         }
     }

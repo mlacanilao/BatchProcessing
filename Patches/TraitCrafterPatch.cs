@@ -12,21 +12,23 @@ namespace BatchProcessing
             {
                 return;
             }
-            
+
             SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
-            
             if (row is null)
             {
                 return;
             }
-            
-            int ingredientMultiplier = BatchProcessingUtils.GetSafeIngredientMultiplier(ai: ai);
+
+            int ingredientMultiplier = Mathf.Max(
+                a: 1,
+                b: BatchProcessingUtils.CachedIngredientMultiplier
+            );
 
             if (ingredientMultiplier == 1)
             {
                 return;
             }
-            
+
             __result?.SetNum(a: __result.Num * ingredientMultiplier);
         }
 
@@ -36,21 +38,23 @@ namespace BatchProcessing
             {
                 return;
             }
-            
+
             SourceRecipe.Row row = BatchProcessingUtils.GetSourceRow(ai: ai);
-            
             if (row is null)
             {
                 return;
             }
-            
-            int ingredientMultiplier = BatchProcessingUtils.GetSafeIngredientMultiplier(ai: ai);
+
+            int ingredientMultiplier = Mathf.Max(
+                a: 1,
+                b: BatchProcessingUtils.CachedIngredientMultiplier
+            );
 
             if (ingredientMultiplier == 1)
             {
                 return;
             }
-            
+
             __result *= ingredientMultiplier;
         }
     }
